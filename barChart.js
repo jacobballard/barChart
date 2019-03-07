@@ -10,6 +10,7 @@ var runGraph = function(dataP){
 dataP.then(function(data) {
   console.log("data", data)
   drawChart(data);
+//  drawLegend(data);
 
 },
 function(error) {
@@ -17,27 +18,19 @@ function(error) {
 });
 }
 
-dataC.then(function(data) {
-  console.log("dataC", data)
-  drawChart(data);
-},
-function(error) {
-  console.log("error", error)
-});
-
-
-
 
 var drawChart = function(colorData) {
-  var svg = d3.select("body").append("svg");
+
   var width = 400;
   var height = 200;
 
 
   var barWidth = width/colorData.length;
-  var svg = d3.select("svg")
+  var svg = d3.select("body")
+              .append("svg")
               .attr("width", width)
               .attr("height", height)
+//creates bars
   svg.selectAll("rect")
      .data(colorData)
      .enter()
@@ -55,5 +48,66 @@ var drawChart = function(colorData) {
      .attr("fill", function(d){
        return d.color;
      })
-
+//creates text
+     svg.selectAll("text")
+     .data(colorData)
+     .enter()
+     .append("text")
+     .attr("x", 375)
+     .attr("y", function(d, i){
+       return 75 + 10 * i})
+     .attr("font-size", 10)
+     .text(function(d) {
+       return d.color;
+    })
+//creates key colors
+     svg.selectAll("circle")
+     .data(colorData)
+     .enter()
+     .append("circle")
+     .attr("cx", 360)
+     .attr("cy", function(d, i){
+       return 70 + 10 * i})
+     .attr("r", 5)
+     .attr("fill", function(d){
+       return d.color;
+ })
 }
+
+
+/*var drawLegend = function(colorData){
+  var width = 400;
+  var height = 200;
+  svg = d3.select("svg")
+
+  svg.selectAll("rect")
+  .data(colorData)
+  .enter()
+  .append("rect")
+  .attr("x", 250)
+  .attr("y", function(d, i){
+    return height - 20 * i})
+  .attr("width", 10)
+  .attr("height", 10)
+  .attr("fill", function(d){
+    return d.color;
+  })
+}
+var drawLegend = function(colorData){
+  var width = 400;
+  var height = 200;
+  svg = d3.select("svg")
+
+  svg.selectAll("rect")
+  .data(colorData)
+  .enter()
+  .append("text")
+  .attr("x", 310)
+  .attr("y", function(d, i){
+    return height - 20 * i})
+  .attr("font-size", 10)
+  .text(function(d) {
+    return d.color;
+  })
+
+}*/

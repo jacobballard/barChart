@@ -3,10 +3,31 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+  <style>
+    svg {
+      display: block;
+    }
+    button {
+        display: block;
+    }
+    button:first-of-type {
+        margin-bottom: 20px;
+    }
+    p {
+      text-align: justify;
+      margin-right: 40%
+    }
+    </style>
   </head>
   <body>
+  <h2> Chart Assignement and Notes</h2>
+  <p>  To minimize the amount of code written, we enclosed our .then method inside of an another function that passes the data
+      promise collected from either the JSON or CSV file as an argument and draws the graph.  Both of the buttons run the function
+      with data extracted from its respective file type as an argument.
+  </p>
     <script src="https://d3js.org/d3.v5.min.js"></script>
   <script type="text/javascript" src="barChart.js"></script>
-  <button onclick="runGraph(dataJ)">Click me</button>
+  <button onclick="runGraph(dataJ)">JSON Generated Graph</button>
+  <button onclick="runGraph(dataC)">CSV Generated Graph</button>
   </body>
 </html>
